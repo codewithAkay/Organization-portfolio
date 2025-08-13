@@ -2,23 +2,25 @@ import React from "react";
 
 function Team() {
   const teamMembers = [
-    {
-      name: "Anas Iqbal",
-      role: "CEO",
-      image: "/assets/website/images/akkk.jpg",
-    },
+    
     {
       name: "Bilal Hussain",
-      role: "CTO",
+      role: "CEO",
       image: "/assets/website/images/team/bkk.jpg",
     },
+     {
+      name: "Anas Iqbal",
+      role: "CTO",
+      image: "/assets/website/images/akkk.jpg",
+    },
+   
     {
       name: "Sadia",
       role: "Project Manager",
       image: "/assets/website/images/team/gg.jpg",
     },
     {
-      name: "Martin Doe",
+      name: "Hasnat iqbal",
       role: "Team Lead",
       image: "/assets/website/images/team/ava.jpg",
     },

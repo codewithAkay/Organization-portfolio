@@ -1,104 +1,190 @@
-import { Link } from "react-router-dom"
-import Team from "./include/Team"
-import { Helmet } from "react-helmet"
-import { useContext } from "react"
-import { Store } from "../../Utils/Store"
+import { Link } from "react-router-dom";
+import Team from "./include/Team";
+import { Helmet } from "react-helmet";
+import { useContext, useState, useEffect } from "react";
+import { Store } from "../../Utils/Store";
 
 function Home() {
-    const { state } = useContext(Store)
-    const { ContactInfo } = state
-    return (
-        <>
-            <Helmet><title>Home</title></Helmet>
+  const { state } = useContext(Store);
+  const { ContactInfo } = state;
 
-            <div id="home2" className="parallax-section">
-                <div className="container">
-                    <div className="slide-text">
-                        <h3>
-                            What we can do?{" "}
-                            <Link
-                                to="#"
-                                className="typewrite"
-                                data-period={2000}
-                                data-type='[ "Web Development", "Mobile Apps", "AI Solutions", "UI/UX Design", "SEO Optimization" ]'
-                            >
-                                <span className="wrap">Web</span>
-                            </Link>{" "}
-                        </h3>
-                        <h1>Welcome to Software Network</h1>
-                        <p>
-                            Welcome to our Software & Development Network — a hub of innovation, collaboration, and technology excellence. We connect you with experienced developers, designers, and IT professionals committed to building powerful, scalable, and user-centric software solutions.
-                        </p>
+  // Background slider images (replace with your own paths)
+  const sliderImages = [
+    "/assets/website/images/home-bg2.jpg",
+    "/assets/website/images/ana.jpg",
+    "/assets/website/images/ans.jpg"
+  ];
 
-                        <Link to="/contact" className="btn btn-default section-btn">
-                            Get Started
-                        </Link>{" "}
-                    </div>
-                </div>
+  const [currentIndex, setCurrentIndex] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentIndex((prevIndex) =>
+        prevIndex === sliderImages.length - 1 ? 0 : prevIndex + 1
+      );
+    }, 5000); // Change slide every 5 seconds
+    return () => clearInterval(interval);
+  }, []);
+
+  return (
+    <>
+      <Helmet>
+        <title>Home</title>
+      </Helmet>
+
+      {/* Background Slider Section */}
+      <div
+        className="home-slider"
+        style={{
+          position: "relative",
+          height: "100vh",
+          overflow: "hidden",
+        }}
+      >
+        {/* Slider Images */}
+        {sliderImages.map((img, index) => (
+          <div
+            key={index}
+            style={{
+              backgroundImage: `url(${img})`,
+              backgroundSize: "cover",
+              backgroundPosition: "center",
+              position: "absolute",
+              top: 0,
+              left: 0,
+              width: "100%",
+              height: "100%",
+              opacity: currentIndex === index ? 1 : 0,
+              transition: "opacity 1s ease-in-out",
+              zIndex: 1,
+            }}
+          ></div>
+        ))}
+
+        {/* Dark Overlay */}
+        <div
+          style={{
+            position: "absolute",
+            top: 0,
+            left: 0,
+            width: "100%",
+            height: "100%",
+            backgroundColor: "rgba(0,0,0,0.4)",
+            zIndex: 2,
+          }}
+        ></div>
+
+        {/* Slider Text */}
+        <div
+          style={{
+            position: "relative",
+            zIndex: 3,
+            color: "#fff",
+            height: "100%",
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "center",
+            alignItems: "center",
+            textAlign: "center",
+            padding: "0 20px",
+          }}
+        >
+          <h1 style={{ fontSize: "3.5rem", fontWeight: "bold" }}>
+            Welcome to Software Network
+          </h1>
+          <p
+            style={{
+              fontSize: "1.5rem",
+              maxWidth: "800px",
+              color: "white" // ✅ Changed to white
+            }}
+          >
+            We build innovative web, mobile, and AI solutions that drive success
+            for your business.
+          </p>
+          <Link
+            to="/contact"
+            className="btn btn-primary"
+            style={{
+              padding: "12px 25px",
+              fontSize: "1.2rem",
+              marginTop: "20px",
+            }}
+          >
+            Get Started
+          </Link>
+        </div>
+      </div>
+
+      {/* Your existing sections below */}
+
+      <div className="howitwrap" id="about">
+        <div className="container">
+          <div className="row">
+            <div className="col-md-4">
+              <img src="/assets/website/images/software.WEBP" alt="About Us" />
             </div>
-
-            <div className="howitwrap" id="about">
-                <div className="container">
-                    <div className="row">
-                        <div className="col-md-4">
-                            <img src="/assets/website/images/software.WEBP" alt="About Us" />
-                        </div>
-                        <div className="col-md-8">
-                            <div className="stcontent">
-                                <div className="section-title">
-                                    <h3>
-                                        Welcome to <span>Software &amp; Development Network</span>
-                                    </h3>
-                                    <p>
-                                        We connect you with skilled software professionals dedicated to delivering innovative,
-                                        reliable, and efficient digital solutions. Whether you need web development, mobile apps,
-                                        AI models, or custom software, our team turns ideas into reality and helps your business
-                                        thrive in the digital era.
-                                    </p>
-                                </div>
-                                <ul className="howlist">
-                                    <li>
-                                        <div className="howbox">
-                                            <div className="iconcircle">
-                                                <i className="fa fa-code" aria-hidden="true"></i>
-                                            </div>
-                                            <h4>Custom Software Development</h4>
-                                            <p>
-                                                From concept to deployment, we create tailor-made software solutions
-                                                designed to meet your specific business needs and drive efficiency.
-                                            </p>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div className="howbox">
-                                            <div className="iconcircle">
-                                                <i className="fa fa-mobile" aria-hidden="true"></i>
-                                            </div>
-                                            <h4>Mobile App Solutions</h4>
-                                            <p>
-                                                We design and develop intuitive, high-performance mobile apps
-                                                for both Android and iOS, helping you engage your audience anywhere.
-                                            </p>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div className="howbox">
-                                            <div className="iconcircle">
-                                                <i className="fa fa-lightbulb-o" aria-hidden="true"></i>
-                                            </div>
-                                            <h4>Innovative Digital Strategies</h4>
-                                            <p>
-                                                Our experts leverage cutting-edge technology to create solutions
-                                                that enhance your brand’s visibility and transform your business digitally.
-                                            </p>
-                                        </div>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
+            <div className="col-md-8">
+              <div className="stcontent">
+                <div className="section-title">
+                  <h3>
+                    Welcome to <span>Software &amp; Development Network</span>
+                  </h3>
+                  <p>
+                    We connect you with skilled software professionals dedicated to delivering innovative,
+                    reliable, and efficient digital solutions. Whether you need web development, mobile apps,
+                    AI models, or custom software, our team turns ideas into reality and helps your business
+                    thrive in the digital era.
+                  </p>
                 </div>
+                <ul className="howlist">
+                  <li>
+                    <div className="howbox">
+                      <div className="iconcircle">
+                        <i className="fa fa-code" aria-hidden="true"></i>
+                      </div>
+                      <h4>Custom Software Development</h4>
+                      <p>
+                        From concept to deployment, we create tailor-made software solutions
+                        designed to meet your specific business needs and drive efficiency.
+                      </p>
+                    </div>
+                  </li>
+                  <li>
+                    <div className="howbox">
+                      <div className="iconcircle">
+                        <i className="fa fa-mobile" aria-hidden="true"></i>
+                      </div>
+                      <h4>Mobile App Solutions</h4>
+                      <p>
+                        We design and develop intuitive, high-performance mobile apps
+                        for both Android and iOS, helping you engage your audience anywhere.
+                      </p>
+                    </div>
+                  </li>
+                  <li>
+                    <div className="howbox">
+                      <div className="iconcircle">
+                        <i className="fa fa-lightbulb-o" aria-hidden="true"></i>
+                      </div>
+                      <h4>Innovative Digital Strategies</h4>
+                      <p>
+                        Our experts leverage cutting-edge technology to create solutions
+                        that enhance your brand’s visibility and transform your business digitally.
+                      </p>
+                    </div>
+                  </li>
+                </ul>
+              </div>
             </div>
+          </div>
+        </div>
+      </div>
+
+ 
+
+
+
 
            {/* Modern Premium Services Section */}
 <div
@@ -124,7 +210,7 @@ function Home() {
       </h3>
       <p
         style={{
-          color: '#555',
+          color: '#555555ff',
           fontSize: '2rem',
           maxWidth: '720px',
           margin: '0 auto',

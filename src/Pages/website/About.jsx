@@ -48,7 +48,7 @@ function About({ title }) {
             <div style={{ flex: '1', minWidth: '300px', display: 'flex', justifyContent: 'center' }}>
               <img
                 
-                src="/assets/website/images/software1.jpg"
+                src="/assets/website/images/software2.JPEG"
                 alt="Legal Network Overview"
                 style={{
                   width: '100%',
