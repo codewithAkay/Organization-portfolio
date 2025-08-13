@@ -1,11 +1,11 @@
 import { Helmet } from "react-helmet";
 import PageTitle from "./include/PageTitle";
-import { useContext, useState } from "react";
-import { Store } from "../../Utils/Store";
+import {  useState } from "react";
+
 
 function Contact({ title }) {
-    const { state } = useContext(Store);
-    const { ContactInfo } = state;
+
+  
 
     const [formData, setFormData] = useState({
         name: "",

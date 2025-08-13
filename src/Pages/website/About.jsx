@@ -1,5 +1,5 @@
 import React from 'react';
-import Team from './include/Team';
+
 import PageTitle from './include/PageTitle';
 import { Helmet } from 'react-helmet';
 

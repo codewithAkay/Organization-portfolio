@@ -15,12 +15,12 @@ function Team() {
     },
    
     {
-      name: "Sadia",
+      name: "Aleena Khan",
       role: "Project Manager",
       image: "/assets/website/images/team/gg.jpg",
     },
     {
-      name: "Hasnat iqbal",
+      name: "Hasnat Iqbal",
       role: "Team Lead",
       image: "/assets/website/images/team/ava.jpg",
     },

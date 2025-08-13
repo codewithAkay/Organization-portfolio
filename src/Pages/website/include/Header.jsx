@@ -6,11 +6,7 @@ function Header() {
   const [theme, setTheme] = useState("light");
   const [menuOpen, setMenuOpen] = useState(false);
 
-  const toggleTheme = () => {
-    const newTheme = theme === "light" ? "dark" : "light";
-    setTheme(newTheme);
-    localStorage.setItem("theme", newTheme);
-  };
+
 
   useEffect(() => {
     const savedTheme = localStorage.getItem("theme");
