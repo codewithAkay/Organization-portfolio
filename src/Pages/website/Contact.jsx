@@ -1,131 +1,64 @@
-import { Helmet } from "react-helmet"
-import PageTitle from "./include/PageTitle"
-import { useContext } from "react"
-import { Store } from "../../Utils/Store"
+import { Helmet } from "react-helmet";
+import PageTitle from "./include/PageTitle";
+import { useContext, useRef } from "react";
+import { Store } from "../../Utils/Store";
+import emailjs from "emailjs-com";
 
 function Contact({ title }) {
-    const { state } = useContext(Store)
-    const { ContactInfo } = state
-    return (
-        <>
-            <Helmet><title>{title}</title></Helmet>
+  const { state } = useContext(Store);
+  const { ContactInfo } = state;
+  const formRef = useRef();
 
+  const sendEmail = (e) => {
+    e.preventDefault();
 
+    emailjs
+      .sendForm(
+        "service_o5oab4u", // ✅ Your Service ID
+        "template_4nn5il5",//D
+        formRef.current,
+        "vpdrnodtSnmKOcAqE" // ✅ Your Public Key
+      )
+      .then(
+        (result) => {
+          alert("Message sent successfully! ✅");
+          formRef.current.reset();
+        },
+        (error) => {
+          alert("Failed to send message ❌: " + error.text);
+        }
+      );
+  };
 
-            <PageTitle title={title} />
-
-
-
-            <div id="contact" className="parallax-section">
-                <div className="container">
-                    {/* SECTION TITLE */}
-                    <div className="section-title">
-                        <h3>Get Free Quote</h3>
-                        <p>
-                            Looking for a personalized estimate? Our team is here to provide you with a free quote tailored to your needs. Contact us today, and let us help you find the best solution.
-                        </p>
-                    </div>
-                    <div className="row">
-                        <div className="col-md-4">
-                            <div className="contact-now">
-                                <div className="contact">
-                                    <span>
-                                        <i className="fa fa-home" />
-                                    </span>
-                                    <div className="information">
-                                        <strong>Address:</strong>
-                                        <p>6xth Road Near Metro station Rawalpindi</p>
-                                    </div>
-                                </div>
-                                {/* Contact Info */}
-                                <div className="contact">
-                                    <span>
-                                        <i className="fa fa-envelope" />
-                                    </span>
-                                    <div className="information">
-                                        <strong>Email Address:</strong>
-                                        <p>Anasiqba0009@gmail.com</p>
-                                    </div>
-                                </div>
-                                {/* Contact Info */}
-                                <div className="contact">
-                                    <span>
-                                        <i className="fa fa-phone" />
-                                    </span>
-                                    <div className="information">
-                                        <strong>Phone No:</strong>
-                                        <p>+923137747781</p>
-                                    </div>
-                                </div>
-                                {/* Contact Info */}
-                            </div>
-                        </div>
-                        <div className="col-md-8">
-                            {/* CONTACT FORM HERE */}
-                            <div className="contact-form">
-                                <form id="contact-form" className="row">
-                                    <div className="col-md-4 col-sm-6">
-                                        <input
-                                            type="text"
-                                            className="form-control"
-                                            name="name"
-                                            placeholder="Name"
-                                        />
-                                    </div>
-                                    <div className="col-md-4 col-sm-6">
-                                        <input
-                                            type="email"
-                                            className="form-control"
-                                            name="email"
-                                            placeholder="Email"
-                                        />
-                                    </div>
-                                    <div className="col-md-4 col-sm-12">
-                                        <input
-                                            type="tel"
-                                            className="form-control"
-                                            name="phone"
-                                            placeholder="Phone"
-                                        />
-                                    </div>
-                                    <div className="col-md-12 col-sm-12">
-                                        <input
-                                            type="text"
-                                            className="form-control"
-                                            name="address"
-                                            placeholder="Address"
-                                        />
-                                    </div>
-                                    <div className="col-md-12 col-sm-12">
-                                        <textarea
-                                            className="form-control"
-                                            rows={5}
-                                            name="message"
-                                            placeholder="Message"
-                                            defaultValue={""}
-                                        />
-                                    </div>
-                                    <div className="col-md-12">
-                                        <button
-                                            id="submit"
-                                            type="submit"
-                                            className="form-control"
-                                            name="submit"
-                                        >
-                                            Send Message
-                                        </button>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-
-
-        </>
-    )
+  return (
+    <>
+      <Helmet>
+        <title>Contact Us</title>
+      </Helmet>
+      <PageTitle title={title} />
+      <div className="container">
+        <form ref={formRef} onSubmit={sendEmail}>
+          <div>
+            <label>Name</label>
+            <input type="text" name="name" required />
+          </div>
+          <div>
+            <label>Email</label>
+            <input type="email" name="email" required />
+          </div>
+          <div>
+            <label>Subject</label>
+            <input type="text" name="title" required />
+          </div>
+          <div>
+            <label>Message</label>
+            <textarea name="message" required></textarea>
+          </div>
+          <button type="submit">Send Message</button>
+        </form>
+      </div>
+    </>
+  );
 }
 
-export default Contact
+export default Contact;

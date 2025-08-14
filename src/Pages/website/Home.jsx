@@ -238,10 +238,8 @@ function Home() {
                                     Work with our expert developers, designers, and strategists to create powerful digital solutions.
                                 </p>
                                 <div style={{ marginTop: '30px' }}>
-                                    <Link to="/contact" className="btn btn-primary btn-lg" style={{ marginRight: '15px' }}>
-                                        <i className="fa fa-envelope" aria-hidden="true"></i> Contact Us
-                                    </Link>
-                                    <Link to="/quote" className="btn btn-outline-primary btn-lg">
+                                    
+                                    <Link to="/contact" className="btn btn-outline-primary btn-lg">
                                         <i className="fa fa-file-text-o" aria-hidden="true"></i> Get a Free Quote
                                     </Link>
                                 </div>
