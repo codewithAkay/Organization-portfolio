@@ -6,8 +6,6 @@ function Header() {
   const [theme, setTheme] = useState("light");
   const [menuOpen, setMenuOpen] = useState(false);
 
-
-
   useEffect(() => {
     const savedTheme = localStorage.getItem("theme");
     if (savedTheme) setTheme(savedTheme);
@@ -16,38 +14,44 @@ function Header() {
   const topBarStyle = {
     backgroundColor: theme === "light" ? "#f4f4f4" : "#222",
     color: theme === "light" ? "#333" : "#fff",
-    fontSize: "0.95rem",
-    padding: "8px 0",
+    fontSize: "1rem",
+    padding: "10px 0",
   };
 
   const navbarStyle = {
     backgroundColor: theme === "light" ? "#fff" : "#111",
     color: theme === "light" ? "#333" : "#fff",
-    padding: "20px 0",
+    padding: "22px 0",
     position: "sticky",
     top: 0,
     zIndex: 1000,
     boxShadow:
       theme === "light"
-        ? "0 2px 8px rgba(0,0,0,0.1)"
-        : "0 2px 8px rgba(255,255,255,0.1)",
+        ? "0 2px 8px rgba(0,0,0,0.06)"
+        : "0 2px 8px rgba(255,255,255,0.05)",
     transition: "all 0.3s ease",
   };
 
   const linkStyle = {
     color: theme === "light" ? "#333" : "#fff",
     textDecoration: "none",
-    padding: "14px 20px",
+    padding: "12px 22px",
     fontSize: "1.25rem",
     fontWeight: "600",
     borderRadius: "6px",
     display: "block",
+    transition: "all 0.3s ease",
   };
 
   const activeLinkStyle = {
-    backgroundColor: "#ff4b4b",
-    color: "#fff",
+    backgroundColor: "transparent",
+    borderBottom: "3px solid #ff4b4b",
     fontWeight: "bold",
+  };
+
+  const hoverStyle = {
+    transform: "scale(1.08)",
+    color: "#ff4b4b",
   };
 
   return (
@@ -65,7 +69,7 @@ function Header() {
           }}
         >
           {/* Social Icons */}
-          <div style={{ display: "flex", gap: "12px", fontSize: "1.1rem" }}>
+          <div style={{ display: "flex", gap: "12px", fontSize: "1.2rem" }}>
             <a href="https://instagram.com" target="_blank" rel="noreferrer">
               <i className="fa fa-instagram" style={{ color: "#ff4b4b" }}></i>
             </a>
@@ -101,29 +105,35 @@ function Header() {
           }}
         >
           {/* Logo */}
-          <h1
-            style={{
-              margin: 0,
-              fontSize: "3rem",
-              fontWeight: "bold",
-              whiteSpace: "nowrap",
-            }}
-            className="header-title"
+          <Link
+            to="/"
+            style={{ textDecoration: "none", color: "inherit" }}
+            onClick={() => setMenuOpen(false)}
           >
-            <span style={{ color: "red" }}>&lt;&gt;</span> Codeova
-          </h1>
+            <h1
+              style={{
+                margin: 0,
+                fontSize: "3rem",
+                fontWeight: "bold",
+                whiteSpace: "nowrap",
+              }}
+              className="header-title"
+            >
+              <span style={{ color: "#ff4b4b" }}>&lt;&gt;</span> Codeova
+            </h1>
+          </Link>
 
           {/* Hamburger Icon */}
           <div
-            onClick={() => setMenuOpen(!menuOpen)}
+            onClick={() => setMenuOpen((prev) => !prev)}
             style={{
-              fontSize: "2.2rem",
+              fontSize: "2.4rem",
               cursor: "pointer",
               display: "none",
             }}
             className="menu-toggle"
           >
-            ☰
+            {menuOpen ? "×" : "☰"}
           </div>
 
           {/* Navigation Links */}
@@ -135,7 +145,7 @@ function Header() {
               margin: 0,
               padding: 0,
               alignItems: "center",
-              gap: "12px",
+              gap: "14px",
             }}
           >
             {[
@@ -152,6 +162,15 @@ function Header() {
                     ...linkStyle,
                     ...(location.pathname === to ? activeLinkStyle : {}),
                   }}
+                  onMouseEnter={(e) =>
+                    Object.assign(e.target.style, hoverStyle)
+                  }
+                  onMouseLeave={(e) =>
+                    Object.assign(e.target.style, {
+                      ...linkStyle,
+                      ...(location.pathname === to ? activeLinkStyle : {}),
+                    })
+                  }
                   onClick={() => setMenuOpen(false)}
                 >
                   {label}
@@ -166,38 +185,39 @@ function Header() {
           @media (max-width: 1024px) {
             .menu-toggle {
               display: block !important;
+              z-index: 3001;
+              position: relative;
             }
             .nav-links {
-              display: flex !important;
               flex-direction: column;
-              background: ${theme === "light" ? "#fff" : "#111"};
+              background: rgba(173, 216, 230, 0.35);
+              backdrop-filter: blur(18px) saturate(180%);
+              -webkit-backdrop-filter: blur(18px) saturate(180%);
               position: fixed;
               top: 0;
               left: -100%;
               height: 100%;
-              width: 260px;
+              width: 280px;
               padding: 20px;
-              box-shadow: 2px 0 8px rgba(0,0,0,0.1);
-              transition: left 0.3s ease;
-              z-index: 2000;
+              box-shadow: 2px 0 15px rgba(0,0,0,0.2);
+              transition: all 0.4s ease;
+              z-index: 3000;
+              border-right: 2px solid rgba(255, 255, 255, 0.25);
             }
             .nav-links.open {
               left: 0;
+              animation: slideIn 0.4s ease forwards;
             }
             .nav-links li {
-              margin: 15px 0;
+              margin: 18px 0;
+              text-align: left;
             }
             .header-title {
-              font-size: 2.5rem !important;
+              font-size: 2.4rem !important;
             }
-          }
-
-          @media (max-width: 600px) {
-            .header-title {
-              font-size: 2rem !important;
-            }
-            .nav-links a {
-              font-size: 1.1rem !important;
+            @keyframes slideIn {
+              from { transform: translateX(-50px); opacity: 0; }
+              to { transform: translateX(0); opacity: 1; }
             }
           }
         `}</style>

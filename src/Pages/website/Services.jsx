@@ -1,5 +1,4 @@
 import React from "react";
-
 import { Helmet } from "react-helmet";
 
 function Services({ title }) {
@@ -20,12 +19,10 @@ function Services({ title }) {
         <title>{title}</title>
       </Helmet>
 
-      
-
       <div
         style={{
-          padding: "70px 0",
-          background: "#fff", // White background
+          padding: "80px 0",
+          background: "linear-gradient(135deg, #fff, #f9f9f9)",
           fontFamily: "'Segoe UI', sans-serif",
         }}
       >
@@ -45,7 +42,7 @@ function Services({ title }) {
           style={{
             display: "grid",
             gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))",
-            gap: "30px",
+            gap: "35px",
             padding: "0 20px",
             maxWidth: "1200px",
             margin: "0 auto",
@@ -56,39 +53,39 @@ function Services({ title }) {
               key={i}
               style={{
                 background: "#fff",
-                border: "1px solid #eee",
-                borderRadius: "18px",
-                padding: "30px 20px",
+                borderRadius: "20px",
+                padding: "35px 25px",
                 textAlign: "center",
-                boxShadow: "0 6px 15px rgba(0,0,0,0.05)",
-                transition: "all 0.3s ease",
+                boxShadow: "0 10px 25px rgba(0,0,0,0.06)",
+                transition: "all 0.35s ease",
                 cursor: "pointer",
+                border: "1px solid rgba(255, 75, 75, 0.08)",
               }}
               onMouseEnter={(e) => {
-                e.currentTarget.style.transform = "translateY(-8px) scale(1.03)";
+                e.currentTarget.style.transform = "translateY(-10px) scale(1.03)";
                 e.currentTarget.style.boxShadow =
-                  "0 12px 25px rgba(0,0,0,0.1)";
+                  "0 20px 40px rgba(0,0,0,0.12)";
               }}
               onMouseLeave={(e) => {
                 e.currentTarget.style.transform = "translateY(0) scale(1)";
                 e.currentTarget.style.boxShadow =
-                  "0 6px 15px rgba(0,0,0,0.05)";
+                  "0 10px 25px rgba(0,0,0,0.06)";
               }}
             >
               {/* Icon Circle */}
               <div
                 style={{
-                  background: "linear-gradient(135deg, #ff4b4b, #ff4b4b)",
+                  background: "linear-gradient(135deg, #ff4b4b, #ff7676)",
                   color: "#fff",
-                  width: "65px",
-                  height: "65px",
+                  width: "70px",
+                  height: "70px",
                   borderRadius: "50%",
                   display: "flex",
                   alignItems: "center",
                   justifyContent: "center",
-                  fontSize: "1.6rem",
-                  margin: "0 auto 20px",
-                  boxShadow: "0 4px 12px rgba(0,0,0,0.2)",
+                  fontSize: "1.8rem",
+                  margin: "0 auto 18px",
+                  boxShadow: "0 6px 15px rgba(255, 75, 75, 0.4)",
                 }}
               >
                 <i className={srv.icon}></i>
@@ -97,9 +94,9 @@ function Services({ title }) {
               {/* Title */}
               <h4
                 style={{
-                  fontSize: "1.35rem",
+                  fontSize: "1.4rem",
                   fontWeight: "bold",
-                  marginBottom: "10px",
+                  marginBottom: "12px",
                   color: "#222",
                 }}
               >
@@ -111,7 +108,7 @@ function Services({ title }) {
                 style={{
                   fontSize: "1rem",
                   color: "#555",
-                  lineHeight: "1.6",
+                  lineHeight: "1.7",
                 }}
               >
                 {srv.desc}
