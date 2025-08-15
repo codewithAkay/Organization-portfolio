@@ -20,7 +20,7 @@ function About({ title }) {
             {/* Left Side Content */}
             <div style={{ flex: '1', minWidth: '300px' }}>
               <h3 style={{ fontSize: '2.5rem', color: '#222', marginBottom: '20px' }}>
-                Discover Our Legal Network
+                Our Mission
               </h3>
               <p style={{ fontSize: '1.25rem', lineHeight: '1.9', color: '#555' }}>
                 At the heart of our platform is a powerful network of seasoned legal professionals,
