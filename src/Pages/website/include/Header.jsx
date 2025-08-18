@@ -106,22 +106,21 @@ function Header() {
         >
           {/* Logo */}
           <Link
-            to="/"
-            style={{ textDecoration: "none", color: "inherit" }}
-            onClick={() => setMenuOpen(false)}
-          >
-            <h1
-              style={{
-                margin: 0,
-                fontSize: "3rem",
-                fontWeight: "bold",
-                whiteSpace: "nowrap",
-              }}
-              className="header-title"
-            >
-              <span style={{ color: "#ff4b4b" }}>&lt;&gt;</span> Codeova
-            </h1>
-          </Link>
+  to="/"
+  style={{ textDecoration: "none", color: "inherit" }}
+  onClick={() => setMenuOpen(false)}
+>
+  <img
+    src="/assets/website/images/codeova.JPEG"
+    alt="Logo"
+    style={{
+      height: "60px",   // adjust size as needed
+      width: "auto",
+      objectFit: "contain",
+    }}
+  />
+</Link>
+
 
           {/* Hamburger Icon */}
           <div
