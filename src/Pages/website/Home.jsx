@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { Helmet } from "react-helmet";
 import { useState, useEffect } from "react";
-import Team from "./include/Team"; // used in JSX, keep it
+import Team from "./include/Team";
 
 function Home() {
   const sliderImages = [
@@ -13,7 +13,7 @@ function Home() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [showTopBtn, setShowTopBtn] = useState(false);
 
-  // Slider effect
+  // Slider auto-change
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentIndex((prevIndex) =>
@@ -21,18 +21,16 @@ function Home() {
       );
     }, 5000);
     return () => clearInterval(interval);
-  }, [sliderImages.length]); // fixed ESLint warning
+  }, [sliderImages.length]);
 
-  // Show Back-to-Top button on scroll
+  // Show back-to-top button
   useEffect(() => {
     const handleScroll = () => setShowTopBtn(window.scrollY > 300);
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const scrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: "smooth" });
-  };
+  const scrollToTop = () => window.scrollTo({ top: 0, behavior: "smooth" });
 
   return (
     <>
@@ -40,8 +38,15 @@ function Home() {
         <title>Home</title>
       </Helmet>
 
-      {/* Slider Section */}
-      <div className="home-slider" style={{ position: "relative", height: "100vh", overflow: "hidden" }}>
+      {/* Hero Slider */}
+      <div
+        className="home-slider"
+        style={{
+          position: "relative",
+          height: "90vh",
+          overflow: "hidden",
+        }}
+      >
         {sliderImages.map((img, index) => (
           <div
             key={index}
@@ -69,12 +74,12 @@ function Home() {
             left: 0,
             width: "100%",
             height: "100%",
-            backgroundColor: "rgba(0,0,0,0.4)",
+            backgroundColor: "rgba(0,0,0,0.45)",
             zIndex: 2,
           }}
         />
 
-        {/* Slider Text */}
+        {/* Slider Content */}
         <div
           style={{
             position: "relative",
@@ -86,138 +91,232 @@ function Home() {
             justifyContent: "center",
             alignItems: "center",
             textAlign: "center",
-            padding: "0 20px",
+            padding: "0 15px",
           }}
         >
-          <h1 style={{ fontSize: "3.5rem", fontWeight: "bold" }}>Welcome to Software Network</h1>
-          <p style={{ fontSize: "1.5rem", maxWidth: "800px", color: "white" }}>
-            We build innovative web, mobile, and AI solutions that drive success for your business.
+          <h1
+            style={{
+              fontSize: "clamp(2rem, 5vw, 3.5rem)",
+              fontWeight: "800",
+              marginBottom: "20px",
+              textShadow: "2px 2px 10px rgba(0,0,0,0.6)",
+            }}
+          >
+            Welcome to <span style={{ color: "#ff4b4b" }}>Code</span>
+            <span style={{ color: "#fff" }}>Ova</span>
+          </h1>
+          <p
+            style={{
+              fontSize: "clamp(1rem, 2vw, 1.3rem)",
+              maxWidth: "700px",
+              lineHeight: "1.6",
+              color: "#fff", // ✅ text forced to white
+            }}
+          >
+            We build innovative web, mobile, and AI solutions that drive success
+            for your business.
           </p>
-          <Link to="/contact" className="btn btn-primary" style={{ padding: "12px 25px", fontSize: "1.2rem", marginTop: "20px" }}>
+          <Link
+            to="/contact"
+            style={{
+              padding: "12px 28px",
+              fontSize: "1.1rem",
+              marginTop: "25px",
+              background: "linear-gradient(45deg, #ff0800, #ff4b4b)",
+              borderRadius: "50px",
+              color: "#fff",
+              textDecoration: "none",
+              fontWeight: "600",
+              transition: "all 0.3s ease",
+            }}
+            onMouseEnter={(e) =>
+              (e.currentTarget.style.transform = "scale(1.05)")
+            }
+            onMouseLeave={(e) =>
+              (e.currentTarget.style.transform = "scale(1)")
+            }
+          >
             Get Started
           </Link>
         </div>
       </div>
 
       {/* About Section */}
-      <div className="howitwrap" id="about">
+      <section id="about" style={{ padding: "80px 0" }}>
         <div className="container">
-  <div className="row align-items-center">
-    <div className="col-md-4 col-sm-12 mb-3" style={{ textAlign: "center" }}>
-      <img
-        src="/assets/website/images/software.WEBP"
-        alt="About Us"
-        style={{
-          width: "100%",
-          height: "auto",
-          maxWidth: "350px", // keeps image from being too big on large screens
-        }}
-      />
-    </div>
-    <div className="col-md-8 col-sm-12">
-      <div className="stcontent">
-        <div className="section-title">
-          <h3 style={{ fontSize: "1.8rem" }}>
-            Welcome to{" "}
-            <span style={{ color: "#ff4b4b" }}>
-              Software & Development Network
-            </span>
-          </h3>
-          <p style={{ fontSize: "1rem" }}>
-            We connect you with skilled software professionals delivering
-            innovative and efficient digital solutions.
-          </p>
-        </div>
-        <ul className="howlist" style={{ paddingLeft: 0 }}>
-          <li style={{ listStyle: "none", marginBottom: "20px" }}>
-            <div className="howbox">
-              <div className="iconcircle" style={{ marginBottom: "10px" }}>
-                <i className="fa fa-code" />
-              </div>
-              <h4 style={{ fontSize: "1.2rem" }}>Custom Software Development</h4>
-              <p style={{ fontSize: "1.1rem" }}>
-            Tailor-made solutions to meet your business needs and drive efficiency
-              </p>
+          <div className="row align-items-center">
+            {/* Image */}
+            <div className="col-md-5 col-sm-12 mb-4 text-center">
+              <img
+                src="/assets/website/images/software.WEBP"
+                alt="About Us"
+                style={{
+                  width: "100%",
+                  maxWidth: "380px",
+                  borderRadius: "12px",
+                  boxShadow: "0 6px 18px rgba(0,0,0,0.1)",
+                }}
+              />
             </div>
-          </li>
-          <li style={{ listStyle: "none", marginBottom: "20px" }}>
-            <div className="howbox">
-              <div className="iconcircle" style={{ marginBottom: "10px" }}>
-                <i className="fa fa-mobile" />
-              </div>
-              <h4 style={{ fontSize: "1.2rem" }}>Mobile App Solutions</h4>
-              <p style={{ fontSize: "1.1rem" }}>
-                High-performance mobile apps for both Android and iOS platforms.
-              </p>
-            </div>
-          </li>
-          <li style={{ listStyle: "none", marginBottom: "20px" }}>
-            <div className="howbox">
-              <div className="iconcircle" style={{ marginBottom: "10px" }}>
-                <i className="fa fa-lightbulb-o" />
-              </div>
-              <h4 style={{ fontSize: "1.2rem" }}>
-                Innovative Digital Strategies
-              </h4>
-              <p style={{ fontSize: "1rem" }}>
-                Leverage cutting-edge technology to enhance your brand’s
-                visibility.
-              </p>
-            </div>
-          </li>
-        </ul>
-      </div>
-    </div>
-  </div>
-</div>
 
-      </div>
+            {/* Text */}
+            <div className="col-md-7 col-sm-12">
+              <h3 style={{ fontSize: "3rem", marginBottom: "20px" }}>
+                Welcome to{" "}
+                <span style={{ color: "#ff4b4b" }}>
+                  Software & Development Network
+                </span>
+              </h3>
+              <p style={{ fontSize: "1.4rem", color: "#444" }}>
+                We connect you with skilled software professionals delivering
+                innovative and efficient digital solutions.
+              </p>
+
+              <div className="row mt-4">
+                {[
+                  {
+                    icon: "fa fa-code",
+                    title: "Custom Software Development",
+                    desc: "Tailor-made solutions to meet your business needs.",
+                  },
+                  {
+                    icon: "fa fa-mobile",
+                    title: "Mobile App Solutions",
+                    desc: "High-performance mobile apps for Android & iOS.",
+                  },
+                  {
+                    icon: "fa fa-lightbulb-o",
+                    title: "Innovative Digital Strategies",
+                    desc: "Cutting-edge technology for brand growth.",
+                  },
+                ].map((item, idx) => (
+                  <div className="col-md-12 mb-3" key={idx}>
+                    <div
+                      style={{
+                        display: "flex",
+                        gap: "15px",
+                        marginBottom: "20px", // ✅ added spacing between items
+                      }}
+                    >
+                      <div
+                        style={{
+                          background: "linear-gradient(45deg, #ff0800, #ff4b4b)",
+                          color: "#fff",
+                          width: "55px",
+                          height: "55px",
+                          borderRadius: "50%",
+                          display: "flex",
+                          alignItems: "center",
+                          justifyContent: "center",
+                          fontSize: "1.3rem",
+                          flexShrink: 0,
+                        }}
+                      >
+                        <i className={item.icon}></i>
+                      </div>
+                      <div>
+                        <h5 style={{ margin: 0 }}>{item.title}</h5>
+                        <p style={{ margin: "5px 0", color: "#555" }}>
+                          {item.desc}
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
 
       {/* Services Section */}
-      <div id="practicearea" style={{ padding: "80px 0", backgroundColor: "#f4f7fa" }}>
-        <div className="container" style={{ textAlign: "center", marginBottom: "60px" }}>
-          <h3 style={{ fontSize: "2.8rem", fontWeight: "800", color: "#1a1a1a" }}>
-            Our <span style={{ color: "#ff0800ff" }}>Services</span>
-          </h3>
-          <p style={{ color: "#555", fontSize: "2rem", maxWidth: "720px", margin: "0 auto" }}>
-            We combine innovation, technology, and creativity to deliver high-end software solutions.
-          </p>
-        </div>
+      <section
+        id="services"
+        style={{ padding: "80px 0", background: "#f9fafc" }}
+      >
+        <div className="container text-center">
+          <h2
+            style={{
+              fontSize: "2.5rem",
+              fontWeight: "700",
+              marginBottom: "20px",
+            }}
+          >
+            Our <span style={{ color: "#ff0800" }}>Services</span>
+          </h2>
+      <p
+  style={{
+    color: "#555",
+    fontSize: "1.3rem",   // 🔥 bigger text
+    lineHeight: "1.8",   // ✅ better spacing
+    fontWeight: "700",   // slightly bolder
+    marginBottom: "50px",
+  }}
+>
+  We combine innovation, technology, and creativity to deliver
+  high-end software solutions.
+</p>
 
-   <div className="row">
+
+          <div className="row">
   {[
-    { title: "Software Development", img: "/assets/website/images/software 22.jpeg", icon: "fa fa-code", desc: "Modern websites built with latest technologies." },
-    { title: "Mobile App Development", img: "/assets/website/images/mobile.jpg", icon: "fa fa-mobile", desc: "Feature-rich mobile applications." },
-    { title: "UI/UX Design", img: "/assets/website/images/design.jpg", icon: "fa fa-paint-brush", desc: "Beautiful, user-friendly designs." },
-    { title: "AI Solutions", img: "/assets/website/images/ai.jpg", icon: "fa fa-brain", desc: "Intelligent AI models for automation." },
-    { title: "Graphic Designing", img: "/assets/website/images/graphic.jpg", icon: "fa fa-pencil-ruler", desc: "Creative visuals and branding materials." },
-    { title: "SEO Optimization", img: "/assets/website/images/seo 11.WEBP", icon: "fa fa-search", desc: "Boost your online presence with SEO." },
-  ].map((service, index) => (
-    <div className="col-md-4 col-sm-5 d-flex" key={index} style={{ marginBottom: "30px" }}>
+    {
+      title: "Software Development",
+      img: "/assets/website/images/software 22.jpeg",
+      icon: "fa fa-code",
+      desc: "Modern software solutions tailored to your needs.",
+    },
+    {
+      title: "Mobile App Development",
+      img: "/assets/website/images/mobile.jpg",
+      icon: "fa fa-mobile",
+      desc: "Feature-rich apps for Android and iOS.",
+    },
+    {
+      title: "UI/UX Design",
+      img: "/assets/website/images/design.jpg",
+      icon: "fa fa-paint-brush",
+      desc: "User-friendly, beautiful interfaces.",
+    },
+    {
+      title: "AI Solutions",
+      img: "/assets/website/images/ai.jpg",
+      icon: "fa fa-brain",
+      desc: "AI-driven automation and analytics.",
+    },
+    {
+      title: "Graphic Designing",
+      img: "/assets/website/images/graphic.jpg",
+      icon: "fa fa-pencil-ruler",
+      desc: "Creative visuals and branding.",
+    },
+    {
+      title: "SEO Optimization",
+      img: "/assets/website/images/seo 11.WEBP",
+      icon: "fa fa-search",
+      desc: "Boost online presence with SEO.",
+    },
+  ].map((service, idx) => (
+    <div className="col-lg-4 col-md-6 mb-4" key={idx}>
       <div
         style={{
-          position: "relative",
-          borderRadius: "15px",
+          background: "#fff",
+          borderRadius: "12px",
           overflow: "hidden",
           boxShadow: "0 6px 18px rgba(0,0,0,0.1)",
-          transition: "transform 0.3s ease, boxShadow 0.3s ease",
-          backgroundColor: "#fff",
-          maxWidth: "360px",
-          margin: "0 auto",
-          display: "flex",
-          flexDirection: "column",
-          height: "100%" // ensures equal height inside flex row
+          transition: "0.3s",
+          height: "100%",
+          margin: "10px", // ✅ Added gap around each card
         }}
-        onMouseEnter={e => {
-          e.currentTarget.style.transform = "translateY(-8px)";
-          e.currentTarget.style.boxShadow = "0 12px 28px rgba(0,0,0,0.15)";
-        }}
-        onMouseLeave={e => {
-          e.currentTarget.style.transform = "translateY(0)";
-          e.currentTarget.style.boxShadow = "0 6px 18px rgba(0,0,0,0.1)";
-        }}
+        onMouseEnter={(e) =>
+          (e.currentTarget.style.transform = "translateY(-8px)")
+        }
+        onMouseLeave={(e) =>
+          (e.currentTarget.style.transform = "translateY(0)")
+        }
       >
-        <div style={{ position: "relative", height: "180px" }}>
+        <div style={{ position: "relative", height: "190px" }}> 
+          {/* ✅ Increased height slightly */}
           <img
             src={service.img}
             alt={service.title}
@@ -225,32 +324,40 @@ function Home() {
               width: "100%",
               height: "100%",
               objectFit: "cover",
-              transition: "transform 0.4s ease"
+              transition: "0.4s",
             }}
-            onMouseEnter={e => e.currentTarget.style.transform = "scale(1.05)"}
-            onMouseLeave={e => e.currentTarget.style.transform = "scale(1)"}
           />
           <div
             style={{
               position: "absolute",
-              top: "10px",
-              left: "10px",
-              backgroundColor: "#ff4b4b",
+              top: "12px",
+              left: "12px",
+              background: "#ff4b4b",
               color: "#fff",
-              padding: "8px",
+              width: "45px",
+              height: "45px",
               borderRadius: "50%",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
               fontSize: "1rem",
-              boxShadow: "0 3px 8px rgba(0,0,0,0.2)"
             }}
           >
             <i className={service.icon}></i>
           </div>
         </div>
-        <div style={{ padding: "15px", textAlign: "center", flexGrow: 1 }}>
-          <h4 style={{ fontSize: "1.2rem", fontWeight: "bold", marginBottom: "8px", color: "#1a1a1a" }}>
+        <div style={{ padding: "22px" }}> 
+          {/* ✅ Slightly more padding */}
+          <h4
+            style={{
+              fontSize: "1.35rem", // ✅ Little bigger heading
+              fontWeight: "700",
+              marginBottom: "12px",
+            }}
+          >
             {service.title}
           </h4>
-          <p style={{ fontSize: "0.9rem", color: "#555", lineHeight: "1.4" }}>
+          <p style={{ fontSize: "1.05rem", color: "#555" }}>
             {service.desc}
           </p>
         </div>
@@ -259,23 +366,58 @@ function Home() {
   ))}
 </div>
 
-
-
-        {/* Team & Call-to-Action */}
-        <Team />
-        <div style={{ padding: "60px 0", textAlign: "center" }}>
-          <Link to="/contact">
-            <i className="fa fa-phone" /> Contact Us Now
-          </Link>
-          <h2>Call Today for a Free Consultation</h2>
-          <p>
-            Get in touch with us today for a free consultation and let our
-            experts help you with your next big project.
-          </p>
         </div>
-      </div>
+      </section>
 
-      {/* Back to Top Button */}
+      {/* Team Section */}
+      <Team />
+
+      {/* CTA Section */}
+      <section
+        style={{
+          padding: "70px 0",
+          background: "linear-gradient(45deg, #fff, #fff)",
+          textAlign: "center",
+        }}
+      >
+        <h2
+          style={{
+            fontSize: "2rem",
+            fontWeight: "700",
+            marginBottom: "15px",
+            color: "#000", // ✅ black heading
+          }}
+        >
+          Call Today for a Free Consultation
+        </h2>
+        <p
+          style={{
+            fontSize: "1.1rem",
+            marginBottom: "30px",
+            color: "#000", // ✅ black text
+          }}
+        >
+          Get in touch with us today for a free consultation and let our experts
+          help you with your next big project.
+        </p>
+        <Link
+          to="/contact"
+          style={{
+            background: "#fff",
+            color: "#fff",
+            backgroundColor: "#ff0800",
+            padding: "12px 30px",
+            fontSize: "1.1rem",
+            borderRadius: "50px",
+            textDecoration: "none",
+            fontWeight: "600",
+          }}
+        >
+          <i className="fa fa-phone"></i> Contact Us Now
+        </Link>
+      </section>
+
+      {/* Back to Top */}
       {showTopBtn && (
         <div
           onClick={scrollToTop}
@@ -284,8 +426,8 @@ function Home() {
             bottom: "40px",
             right: "40px",
             background: "linear-gradient(45deg, #ff0800, #ff4b4b)",
-            width: "60px",
-            height: "60px",
+            width: "55px",
+            height: "55px",
             borderRadius: "50%",
             display: "flex",
             justifyContent: "center",
@@ -294,12 +436,10 @@ function Home() {
             cursor: "pointer",
             boxShadow: "0 8px 20px rgba(0,0,0,0.3)",
             zIndex: 9999,
-            transition: "all 0.3s ease",
+            transition: "0.3s",
           }}
-          onMouseEnter={e => { e.currentTarget.style.transform = "scale(1.1)"; e.currentTarget.style.boxShadow = "0 12px 30px rgba(0,0,0,0.4)"; }}
-          onMouseLeave={e => { e.currentTarget.style.transform = "scale(1)"; e.currentTarget.style.boxShadow = "0 8px 20px rgba(0,0,0,0.3)"; }}
         >
-          <i className="fa fa-arrow-up" style={{ fontSize: "1.5rem" }}></i>
+          <i className="fa fa-arrow-up" style={{ fontSize: "1.3rem" }}></i>
         </div>
       )}
     </>

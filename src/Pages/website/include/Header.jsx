@@ -15,13 +15,13 @@ function Header() {
     backgroundColor: theme === "light" ? "#f4f4f4" : "#222",
     color: theme === "light" ? "#333" : "#fff",
     fontSize: "1rem",
-    padding: "10px 0",
+    padding: "6px 0", // smaller top bar
   };
 
   const navbarStyle = {
     backgroundColor: theme === "light" ? "#fff" : "#111",
     color: theme === "light" ? "#333" : "#fff",
-    padding: "22px 0",
+    padding: "10px 0", // 🔥 reduced navbar height
     position: "sticky",
     top: 0,
     zIndex: 1000,
@@ -35,8 +35,8 @@ function Header() {
   const linkStyle = {
     color: theme === "light" ? "#333" : "#fff",
     textDecoration: "none",
-    padding: "12px 22px",
-    fontSize: "1.25rem",
+    padding: "8px 16px", // 🔥 smaller padding for links
+    fontSize: "1.1rem",
     fontWeight: "600",
     borderRadius: "6px",
     display: "block",
@@ -69,7 +69,7 @@ function Header() {
           }}
         >
           {/* Social Icons */}
-          <div style={{ display: "flex", gap: "12px", fontSize: "1.2rem" }}>
+          <div style={{ display: "flex", gap: "12px", fontSize: "1.1rem" }}>
             <a href="https://instagram.com" target="_blank" rel="noreferrer">
               <i className="fa fa-instagram" style={{ color: "#ff4b4b" }}></i>
             </a>
@@ -82,12 +82,12 @@ function Header() {
           </div>
 
           {/* Email */}
-          <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
+          <div style={{ display: "flex", alignItems: "center", gap: "6px" }}>
             <i
               className="fa fa-envelope"
-              style={{ color: "#ff4b4b", fontSize: "1rem" }}
+              style={{ color: "#ff4b4b", fontSize: "0.9rem" }}
             ></i>
-            <span>info@bilal.com</span>
+            <span style={{ fontSize: "0.9rem" }}>info@Codeova.com</span>
           </div>
         </div>
       </div>
@@ -110,23 +110,37 @@ function Header() {
   style={{ textDecoration: "none", color: "inherit" }}
   onClick={() => setMenuOpen(false)}
 >
-  <img
-    src="/assets/website/images/codeova.JPEG"
-    alt="Logo"
+  <div
     style={{
-      height: "60px",   // adjust size as needed
-      width: "auto",
-      objectFit: "contain",
+      height: "60px", // navbar height
+      display: "flex",
+      alignItems: "center",
+      gap: "10px", // space between logo and text
     }}
-  />
-</Link>
+  >
+    <img
+      src="/assets/website/images/codeova.PNG"
+      alt="Logo"
+      style={{
+        height: "70px", // adjust as needed
+        width: "auto",
+        objectFit: "contain",
+      }}
+    />
 
+    {/* Brand Name */}
+    <h1 style={{ margin: 0, fontSize: "2rem", fontWeight: "bold" }}>
+      <span style={{ color: "black" }}>Code</span>
+      <span style={{ color: "darkred" }}>Ova</span>
+    </h1>
+  </div>
+</Link>
 
           {/* Hamburger Icon */}
           <div
             onClick={() => setMenuOpen((prev) => !prev)}
             style={{
-              fontSize: "2.4rem",
+              fontSize: "2rem",
               cursor: "pointer",
               display: "none",
             }}
@@ -144,7 +158,7 @@ function Header() {
               margin: 0,
               padding: 0,
               alignItems: "center",
-              gap: "14px",
+              gap: "10px",
             }}
           >
             {[
@@ -196,7 +210,7 @@ function Header() {
               top: 0;
               left: -100%;
               height: 100%;
-              width: 280px;
+              width: 260px;
               padding: 20px;
               box-shadow: 2px 0 15px rgba(0,0,0,0.2);
               transition: all 0.4s ease;
@@ -208,11 +222,11 @@ function Header() {
               animation: slideIn 0.4s ease forwards;
             }
             .nav-links li {
-              margin: 18px 0;
+              margin: 16px 0;
               text-align: left;
             }
             .header-title {
-              font-size: 2.4rem !important;
+              font-size: 2rem !important;
             }
             @keyframes slideIn {
               from { transform: translateX(-50px); opacity: 0; }

@@ -78,7 +78,7 @@ function Footer() {
                       <i className="fa fa-phone" /> +923137747781
                     </li>
                     <li>
-                      <i className="fa fa-envelope" /> Anasiqbal0009@gmail.com
+                      <i className="fa fa-envelope" /> info@Codeova.com
                     </li>
                   </ul>
 
